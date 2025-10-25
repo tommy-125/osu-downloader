@@ -6,8 +6,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root(request: Request):
-    code = request.query_params.get("code")
-    osuAuth.getTokenFromCode(code)
+    osuAuth.code = request.query_params.get("code")
     return HTMLResponse(f"""
        <h2>授權成功!</h2> 
     """)

@@ -1,5 +1,7 @@
 import time
+from uvicorn import Server
 import requests
+import asyncio
 import webbrowser
 import os
 from src.core import config
@@ -7,7 +9,7 @@ from src.core import config
 from dotenv import set_key
 
 class OsuAuth:
-    def authorize(self):
+    async def authorize(self,server:Server):
         access_token = config.get_access_token()
         if access_token:
             token_time = float(config.get_access_token_time())
@@ -17,7 +19,16 @@ class OsuAuth:
             if isExpired:
                 self.refreshToken()
         else:
+            server_task = asyncio.create_task(server.serve())
+            self.code = ""
             self.getCode()
+            while not self.code:
+                await asyncio.sleep(0.5)
+            self.getTokenFromCode(self.code)
+            server.should_exit = True
+            await server_task
+            
+
 
     def getCode(self):
         url = "https://osu.ppy.sh/oauth/authorize"

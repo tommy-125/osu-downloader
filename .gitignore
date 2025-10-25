@@ -7,7 +7,7 @@
 *.dll
 *.so
 *.dylib
-
+*.py[cod]
 # Test binary, built with `go test -c`
 *.test
 
@@ -18,12 +18,7 @@ coverage.*
 profile.cov
 
 # Dependency directories (remove the comment below to include it)
-# vendor/
-
-# Go workspace file
-go.work
-go.work.sum
-
+__pycache__/
 # env file
 .env
 
