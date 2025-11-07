@@ -8,8 +8,8 @@
 *.so
 *.dylib
 *.py[cod]
-# Test binary, built with `go test -c`
 *.test
+test.json
 
 # Code coverage profiles and other test artifacts
 *.out

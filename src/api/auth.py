@@ -35,7 +35,8 @@ class OsuAuth:
         params = {
             "client_id" : config.get_client_id(),
             "redirect_uri" : "http://localhost:8000",
-            "response_type" : "code"
+            "response_type" : "code",
+            "scope" : "public"
         }
         response = requests.get(url, params=params)
         webbrowser.open(response.url)
