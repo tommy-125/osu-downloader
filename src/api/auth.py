@@ -62,10 +62,12 @@ class OsuAuth:
             now = time.time()
             set_key(config.env_path, "ACCESS_TOKEN", tokenData["access_token"])
             set_key(config.env_path, "REFRESH_TOKEN", tokenData["refresh_token"])
+            set_key(config.env_path, "EXPIRES_IN", tokenData["expires_in"])
             set_key(config.env_path, "ACCESS_TOKEN_TIME", str(now))
             # 立即更新 process environment，讓其他程式碼可以即時讀到新 token
             os.environ["ACCESS_TOKEN"] = tokenData["access_token"]
             os.environ["REFRESH_TOKEN"] = tokenData["refresh_token"]
+            os.environ["EXPIRES_IN"] = tokenData["expires_in"]
             os.environ["ACCESS_TOKEN_TIME"] = str(now)
             print(tokenData)
         except requests.exceptions.RequestException as e:
