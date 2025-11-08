@@ -11,7 +11,7 @@ laying the foundation for future osu!-related automation tools.
 
 ## Example Usage
 
-# Authorization Code Grant
+### Authorization Code Grant
 ```
 import uvicorn
 import asyncio
@@ -23,7 +23,7 @@ server = uvicorn.Server(serverConfig)
 asyncio.run(osuAuth.getAuthorization(server))
 ```
 
-# Client Credentials Grant
+### Client Credentials Grant
 ```
 from src.api.auth import osuAuth
 
