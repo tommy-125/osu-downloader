@@ -11,11 +11,27 @@ def searchBeatmap():
     }
     params = {
         "m" : "3",
-        "q" : "key=4"
+        "q" : "key=4 artist=\"camellia\""
     }
     response = requests.get(url, headers=headers, params=params)
+
     data = response.json()  # Python dict
-    # 寫入 JSON 檔案
-    with open("test.json", "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    print("已將結果寫入 beatmaps.json")
+    beatmapIDForDownload = []
+    while True:
+        beatmapsetCount = len(data["beatmapsets"])
+
+        for i in range(beatmapsetCount): # 遍歷每個beatmapset
+            beatmapCount = len(data["beatmapsets"][i]["beatmaps"])
+            beatmapList = data["beatmapsets"][i]["beatmaps"]
+            for j in range(beatmapCount): # 遍歷每個beatmap
+                if(beatmapList[j]["mode"] == "mania"):
+                    beatmapIDForDownload.append(beatmapList[j]["id"])
+
+        if data["cursor_string"] is None:
+            break
+        else:
+            params["cursor_string"] = data["cursor_string"]
+            response = requests.get(url, headers=headers, params=params)
+            data = response.json()
+    print(beatmapIDForDownload)
+    return beatmapIDForDownload

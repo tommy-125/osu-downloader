@@ -156,3 +156,6 @@ Desktop.ini
 
 # Project specific
 debug/
+
+# Json for testing
+*test*.json

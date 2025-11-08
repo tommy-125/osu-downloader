@@ -8,5 +8,6 @@ app = FastAPI()
 async def root(request: Request):
     osuAuth.code = request.query_params.get("code")
     return HTMLResponse(f"""
-       <h2>授權成功!</h2> 
+       <h2>授權成功!\n</h2>
+         <p>你可以關閉此視窗了</p>
     """)
